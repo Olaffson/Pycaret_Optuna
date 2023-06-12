@@ -11,8 +11,7 @@ Depuis plusieurs années, les prix de vente des maisons explosent à Boston en r
 La municipalité désire donc que vous créez un modèle permettant de lier l’adresse et les caractéristiques du logement afin de pouvoir déterminer pour chaque logement le prix maximal auquel il peut être vendu.
 
 Vous devez donc:
+Créer un modèle d'IA
+Présenter le modèle obtenu en accord avec les bonnes pratiques du métier et sous format slides
 
-    créer un modèle d'IA
-    présenter le modèle obtenu en accord avec les bonnes pratiques du métier et sous format slides
-
-
+Le but du projet est de réaliser un modèle d IA rapidement a l'aide de Pycaret et Optuna, et de réaliser une veille sur les features importances
