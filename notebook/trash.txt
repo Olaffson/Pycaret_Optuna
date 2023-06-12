@@ -1,0 +1,4 @@
+- la PCA n a pas été utilsé ici car il y a peu de colonnes
+- Pycaret permet de determiner les algo de regression les plus pertinants
+- les differents algo de regression sont ensuite testés individuellement
+- on utilise egalement optuna afin d optimiser les hyperparametres
