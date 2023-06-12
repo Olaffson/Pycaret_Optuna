@@ -18,4 +18,4 @@ Présenter le modèle obtenu en accord avec les bonnes pratiques du métier et s
 Le but du projet est de réaliser un modèle d IA rapidement a l'aide de Pycaret et Optuna, et de réaliser une veille sur les features importances.
 
 Pycaret permet de determiner les algo (ici de regression) les plus pertinants.
-Optuna permet d optimiser les hyperparametres
+Optuna permet d optimiser les hyperparametres (plus rapide que la methode GridSearch)
