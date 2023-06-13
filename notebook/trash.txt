@@ -2,3 +2,7 @@
 - Pycaret permet de determiner les algo de regression les plus pertinants
 - les differents algo de regression sont ensuite testés individuellement
 - on utilise egalement optuna afin d optimiser les hyperparametres
+
+
+intro
+objectif target
