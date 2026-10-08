@@ -1,0 +1,34 @@
+[project]
+name = "pycaret-optuna"
+version = "0.1.0"
+description = "Prédiction du prix médian des logements à Boston avec Pycaret et Optuna"
+readme = "README.md"
+# Pycaret 3.3 ne supporte pas Python 3.12 et plus
+requires-python = ">=3.11,<3.12"
+# Versions testées : les notebooks s'exécutent de bout en bout avec celles-ci
+dependencies = [
+    "pandas==2.1.4",
+    "scikit-learn==1.4.2",
+    "pycaret==3.3.2",
+    "optuna==5.0.0",
+    # catboost 1.2.10 casse tune_model de Pycaret 3.3 (clonage scikit-learn)
+    "catboost==1.2.8",
+    # ydata-profiling >= 4.16 : to_widgets() échoue ("widget type not understood")
+    "ydata-profiling==4.15.1",
+    "ipywidgets==8.1.9",
+    "openpyxl==3.1.5",
+    "ipykernel==7.4.0",
+    # matplotlib 3.7 (imposé par Pycaret) est incompatible avec IPython 9
+    "ipython<9",
+    # ydata-profiling importe pkg_resources, retiré de setuptools 81
+    "setuptools<81",
+]
+
+[dependency-groups]
+dev = [
+    "jupyterlab>=4,<5",
+]
+
+[tool.uv]
+# Projet de notebooks : rien à construire ni à installer comme paquet
+package = false
