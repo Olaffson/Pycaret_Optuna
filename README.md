@@ -36,10 +36,19 @@ Optuna permet d optimiser les hyperparametres (plus rapide que la methode GridSe
 
 ## Installation
 
-Python 3.9 à 3.11 (contrainte de Pycaret) :
+Les dépendances sont gérées avec [uv](https://docs.astral.sh/uv/) : `pyproject.toml` liste les dépendances, `uv.lock` fige toutes les versions. uv installe lui-même Python 3.11 (Pycaret ne supporte pas Python 3.12 et plus).
 
 ```bash
-python3.11 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+# installer uv (une seule fois)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# créer l'environnement à partir du fichier de verrouillage
+uv sync
+
+# lancer Jupyter
+uv run jupyter lab
 ```
+
+Ajouter une dépendance : `uv add <paquet>` (met à jour `pyproject.toml` et `uv.lock`).
+
+Sans uv, avec pip : `uv export --no-hashes --no-dev > requirements.txt` puis `pip install -r requirements.txt` dans un environnement Python 3.11.
