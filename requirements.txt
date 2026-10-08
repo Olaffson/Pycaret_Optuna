@@ -1,0 +1,16 @@
+# Python 3.9 à 3.11 (contrainte de PyCaret 3.3)
+pandas==2.1.4
+scikit-learn==1.4.2
+pycaret==3.3.2
+optuna==5.0.0
+# catboost 1.2.10 casse tune_model de Pycaret 3.3 (clonage scikit-learn)
+catboost==1.2.8
+# ydata-profiling >= 4.16 : to_widgets() échoue ("widget type not understood")
+ydata-profiling==4.15.1
+ipywidgets==8.1.9
+openpyxl==3.1.5
+ipykernel==7.4.0
+# matplotlib 3.7 (imposé par Pycaret) est incompatible avec IPython 9
+ipython<9
+# ydata-profiling importe pkg_resources, retiré de setuptools 81
+setuptools<81
