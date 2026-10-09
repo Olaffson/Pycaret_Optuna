@@ -1,5 +1,7 @@
 # Pycaret_Optuna
 
+[![Notebooks](https://github.com/Olaffson/Pycaret_Optuna/actions/workflows/notebooks.yml/badge.svg?branch=main)](https://github.com/Olaffson/Pycaret_Optuna/actions/workflows/notebooks.yml)
+
 recuperation du dataset :
 https://faculty.tuck.dartmouth.edu/images/uploads/faculty/business-analytics/Boston_Housing.xlsx
 
