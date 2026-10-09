@@ -161,3 +161,6 @@ cython_debug/
 
 # CatBoost (fichiers générés pendant l'entraînement)
 catboost_info/
+
+# Notebooks exécutés par scripts/run_notebooks.sh
+executed/
