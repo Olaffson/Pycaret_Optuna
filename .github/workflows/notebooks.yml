@@ -1,4 +1,4 @@
-name: Notebooks
+name: CI
 
 on:
   push:
@@ -19,6 +19,23 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  tests:
+    name: Tests unitaires
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Installer les dépendances (uv.lock)
+        run: uv sync --locked
+
+      - name: Lancer pytest
+        run: uv run --locked pytest
+
   notebooks:
     name: Exécution des notebooks
     runs-on: ubuntu-latest
