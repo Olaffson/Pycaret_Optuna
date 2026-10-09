@@ -38,7 +38,11 @@ def build_preprocessor() -> ColumnTransformer:
     """One-hot sur les variables catégorielles, standardisation des numériques."""
     return ColumnTransformer(
         transformers=[
-            ("cat", OneHotEncoder(sparse_output=True, handle_unknown="ignore"), CATEGORICAL_FEATURES),
+            (
+                "cat",
+                OneHotEncoder(sparse_output=True, handle_unknown="ignore"),
+                CATEGORICAL_FEATURES,
+            ),
             ("num", StandardScaler(), NUMERICAL_FEATURES),
         ],
         remainder="passthrough",
