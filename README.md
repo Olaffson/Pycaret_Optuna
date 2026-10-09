@@ -52,3 +52,16 @@ uv run jupyter lab
 Ajouter une dépendance : `uv add <paquet>` (met à jour `pyproject.toml` et `uv.lock`).
 
 Sans uv, avec pip : `uv export --no-hashes --no-dev > requirements.txt` puis `pip install -r requirements.txt` dans un environnement Python 3.11.
+
+## Exécuter tous les notebooks
+
+```bash
+./scripts/run_notebooks.sh              # 100 essais Optuna par modèle
+N_TRIALS=5 ./scripts/run_notebooks.sh   # rapide, pour vérifier que tout s'exécute
+```
+
+Les notebooks exécutés sont écrits dans `executed/` (ignoré par git).
+
+## Intégration continue
+
+Le workflow GitHub Actions `Notebooks` (`.github/workflows/notebooks.yml`) installe l'environnement depuis `uv.lock`, exécute tous les notebooks avec 5 essais Optuna et vérifie que `silver.csv` et `gold.csv` sont régénérés à l'identique. Il tourne à chaque pull request et à chaque push sur `main` ; il peut aussi être lancé à la main (onglet Actions) avec un autre nombre d'essais. Les notebooks exécutés sont disponibles dans l'artefact `notebooks-executes`.

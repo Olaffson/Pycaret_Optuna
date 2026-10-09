@@ -1,0 +1,51 @@
+name: Notebooks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      n_trials:
+        description: "Nombre d'essais Optuna par modèle (100 pour une exécution complète)"
+        required: true
+        default: "5"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  notebooks:
+    name: Exécution des notebooks
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      # 5 essais suffisent pour vérifier que tout s'exécute ; ajustable en lancement manuel
+      N_TRIALS: ${{ inputs.n_trials || '5' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Installer les dépendances (uv.lock)
+        run: uv sync --locked
+
+      - name: Exécuter les notebooks
+        run: ./scripts/run_notebooks.sh
+
+      - name: Vérifier que silver.csv et gold.csv sont régénérés à l'identique
+        run: git diff --exit-code -- data/
+
+      - name: Publier les notebooks exécutés
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: notebooks-executes
+          path: executed/
+          if-no-files-found: ignore
