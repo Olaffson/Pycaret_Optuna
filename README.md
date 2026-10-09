@@ -77,6 +77,15 @@ Les tests unitaires (`tests/`) couvrent ce paquet et la cohérence des fichiers 
 uv run pytest
 ```
 
+## Lint et formatage
+
+Le code (paquet, tests et notebooks) est vérifié avec [ruff](https://docs.astral.sh/ruff/), configuré dans `pyproject.toml` :
+
+```bash
+uv run ruff check .          # lint (ajouter --fix pour corriger automatiquement)
+uv run ruff format .         # formatage
+```
+
 ## Intégration continue
 
-Le workflow GitHub Actions `CI` (`.github/workflows/notebooks.yml`) lance les tests unitaires, puis installe l'environnement depuis `uv.lock`, exécute tous les notebooks avec 5 essais Optuna et vérifie que `silver.csv` et `gold.csv` sont régénérés à l'identique. Il tourne à chaque pull request et à chaque push sur `main` ; il peut aussi être lancé à la main (onglet Actions) avec un autre nombre d'essais. Les notebooks exécutés sont disponibles dans l'artefact `notebooks-executes`.
+Le workflow GitHub Actions `CI` (`.github/workflows/notebooks.yml`) vérifie le lint et le formatage avec ruff, lance les tests unitaires, puis installe l'environnement depuis `uv.lock`, exécute tous les notebooks avec 5 essais Optuna et vérifie que `silver.csv` et `gold.csv` sont régénérés à l'identique. Il tourne à chaque pull request et à chaque push sur `main` ; il peut aussi être lancé à la main (onglet Actions) avec un autre nombre d'essais. Les notebooks exécutés sont disponibles dans l'artefact `notebooks-executes`.
