@@ -1,6 +1,6 @@
 # Pycaret_Optuna
 
-[![Notebooks](https://github.com/Olaffson/Pycaret_Optuna/actions/workflows/notebooks.yml/badge.svg?branch=main)](https://github.com/Olaffson/Pycaret_Optuna/actions/workflows/notebooks.yml)
+[![CI](https://github.com/Olaffson/Pycaret_Optuna/actions/workflows/notebooks.yml/badge.svg?branch=main)](https://github.com/Olaffson/Pycaret_Optuna/actions/workflows/notebooks.yml)
 
 recuperation du dataset :
 https://faculty.tuck.dartmouth.edu/images/uploads/faculty/business-analytics/Boston_Housing.xlsx
@@ -64,6 +64,19 @@ N_TRIALS=5 ./scripts/run_notebooks.sh   # rapide, pour vérifier que tout s'exé
 
 Les notebooks exécutés sont écrits dans `executed/` (ignoré par git).
 
+## Code partagé et tests
+
+Le code commun aux notebooks est dans le paquet `src/pycaret_optuna/` (installé par `uv sync`) :
+
+- `data.py` : renommage des colonnes du dataset (`rename_columns`) ;
+- `modeling.py` : découpage entraînement / test, préprocesseur, pipeline, validation croisée et métriques.
+
+Les tests unitaires (`tests/`) couvrent ce paquet et la cohérence des fichiers `bronze` → `silver` → `gold` :
+
+```bash
+uv run pytest
+```
+
 ## Intégration continue
 
-Le workflow GitHub Actions `Notebooks` (`.github/workflows/notebooks.yml`) installe l'environnement depuis `uv.lock`, exécute tous les notebooks avec 5 essais Optuna et vérifie que `silver.csv` et `gold.csv` sont régénérés à l'identique. Il tourne à chaque pull request et à chaque push sur `main` ; il peut aussi être lancé à la main (onglet Actions) avec un autre nombre d'essais. Les notebooks exécutés sont disponibles dans l'artefact `notebooks-executes`.
+Le workflow GitHub Actions `CI` (`.github/workflows/notebooks.yml`) lance les tests unitaires, puis installe l'environnement depuis `uv.lock`, exécute tous les notebooks avec 5 essais Optuna et vérifie que `silver.csv` et `gold.csv` sont régénérés à l'identique. Il tourne à chaque pull request et à chaque push sur `main` ; il peut aussi être lancé à la main (onglet Actions) avec un autre nombre d'essais. Les notebooks exécutés sont disponibles dans l'artefact `notebooks-executes`.

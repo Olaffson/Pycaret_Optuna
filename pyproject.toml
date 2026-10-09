@@ -27,8 +27,16 @@ dependencies = [
 [dependency-groups]
 dev = [
     "jupyterlab>=4,<5",
+    "pytest>=8,<9",
 ]
 
-[tool.uv]
-# Projet de notebooks : rien à construire ni à installer comme paquet
-package = false
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+# Code partagé par les notebooks, installé en mode éditable par uv sync
+packages = ["src/pycaret_optuna"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
